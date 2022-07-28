@@ -6,32 +6,21 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import com.nt.entity.Employee;
-
 @Component
-public class ConsumerRunner implements CommandLineRunner {
+public class Consumerrunner implements CommandLineRunner {
 
-	private Logger log = LoggerFactory.getLogger(ConsumerRunner.class);
 	
+	private Logger log = LoggerFactory.getLogger(Consumerrunner.class);
 	@Override
 	public void run(String... args) throws Exception {
 		
 		
-		//create the RestTemplate object
-		RestTemplate rs = new RestTemplate();
-		
-		//define url
-		String url ="http://localhost:9990/employee/show";
-		
-		//make http calls and get response
-	ResponseEntity<Object> resp	=rs.getForEntity(url, Object.class);
-		
-		//print the details
+		RestTemplate rt = new RestTemplate();
+		String url ="http://localhost:8086/Employee/one";
+		ResponseEntity<Object> resp =rt.getForEntity(url, Object.class);
 		log.info("Status code { }"+resp.getStatusCode() );
 		log.info("Status value{ }" +resp.getStatusCodeValue());
 		log.info("Body{ }" +resp.getBody());
-	
 	}
 
 }
